@@ -1,0 +1,77 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include<Windows.h>
+using namespace std;
+struct Employee {
+    string fio;
+    string dol;
+    string data;
+    double zp;
+};
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    SetConsoleCP(1251);
+    int NUM_EMPLOYEES;
+    cout << "Введите кол-во сотрудников: ";
+    cin >> NUM_EMPLOYEES;
+    cin.ignore();
+    Employee* employees = new Employee[NUM_EMPLOYEES];
+
+    // Ввод данных о сотрудниках
+    for (int i = 0; i < NUM_EMPLOYEES; i++) {
+        cout << "Введите Ф.И.О. сотрудника " << i + 1 << ": ";
+        getline(cin, employees[i].fio);
+
+        cout << "Введите должность сотрудника " << i + 1 << ": ";
+        getline(cin, employees[i].dol);
+
+        cout << "Введите год и дату рождения сотрудника " << i + 1 << ": ";
+        getline(cin, employees[i].data);
+
+        cout << "Введите заработную плату сотрудника " << i + 1 << ": ";
+        cin >> employees[i].zp;
+        cin.ignore(); // игнорируем символ новой строки после ввода числа
+    }
+
+    // Вывод ведомости начисленной заработной платы
+    cout << "\nВедомость начисленной заработной платы:\n";
+    cout << "---------------------------------------------------------------------------\n";
+    cout <<"|" << setw(25) << left << "Ф.И.О.";
+    cout <<"|" << setw(15) << left << "Должность";
+    cout <<"|" << setw(20) << left << "Дата рождения";
+    cout <<"|" << setw(10) << right << "З/П" <<"|" << endl;
+    cout << "---------------------------------------------------------------------------\n";
+    for (int i = 0; i < NUM_EMPLOYEES; i++) {
+        cout << "|" << setw(25) << left << employees[i].fio;
+        cout << "|" << setw(15) << left << employees[i].dol;
+        cout << "|" << setw(20) << left << employees[i].data;
+        cout << "|" << setw(10) << right << employees[i].zp << "|" << endl;
+        cout << "---------------------------------------------------------------------------\n";
+    }
+   
+    double sredzp = 0;
+    for (int i = 0; i < NUM_EMPLOYEES; i++)
+    {
+        sredzp +=employees[i].zp;
+    }
+    sredzp /=NUM_EMPLOYEES;
+    cout << "Средняя зарплата = " << sredzp;
+    cout << "\nЗарабатная плата выше средней у:\n";
+    cout << "--------------------------------------\n";
+    cout<<"|" << setw(25) << left << "Ф.И.О.";
+    cout<<"|" << setw(10) << right << "З/П"<<"|" << endl;
+    cout << "--------------------------------------\n";
+    for (int i = 0; i < NUM_EMPLOYEES; i++) {
+        if (employees[i].zp > sredzp)
+        {
+            cout <<"|" << setw(25) << left << employees[i].fio;
+            cout<<"|" << setw(10) << right << employees[i].zp <<"|" << endl;
+            cout << "--------------------------------------\n";
+        }
+    }
+    
+    delete[] employees;
+    return 0;
+}
