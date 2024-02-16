@@ -1,0 +1,23 @@
+#include<iostream>
+#include<string>
+#include<Windows.h>
+using namespace std;
+int main() {
+	setlocale(LC_ALL, "Russian");
+	SetConsoleCP(1251);
+	string messeg1;
+	string messegnew ="";
+	cout << "введите последовательность символов"<<endl;
+	getline(cin, messeg1);
+	for (int i = 0; i < messeg1.size(); i++)
+	{
+		if(messeg1[i] ==' ' or messeg1[i] == '.' or messeg1[i] == ',')
+		{
+			continue;
+		}
+		messegnew += messeg1[i];
+	}
+	cout << "новая последовательность" << endl;
+	cout << messegnew;
+	return 0;
+}
