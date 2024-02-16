@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string>
+#include<Windows.h>
+using namespace std;
+int main() {
+	setlocale(LC_ALL, "Russian");
+	SetConsoleCP(1251);
+	string messeg1;
+	string messegnew ="";
+	int size =0;
+	cout << "Введите ФИО"<<endl;
+	getline(cin, messeg1);
+	for (int i = 0; i < messeg1.size(); i++)
+	{
+		if(messeg1[i] ==' ')
+		{
+			messegnew += messeg1[i];
+			messegnew += messeg1[i + 1];
+			messegnew += '.';
+			size = i+2;
+			break;
+		}
+		messegnew += messeg1[i];
+	}
+	for (int i = size; i < messeg1.size(); i++)
+	{
+		if (messeg1[i] == ' ')
+		{
+			messegnew += messeg1[i+1];
+			messegnew += '.';
+			break;
+		}
+	}
+	cout << "фамили и инициалы: " << messegnew;
+	return 0;
+}
