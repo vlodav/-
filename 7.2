@@ -1,0 +1,107 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include<Windows.h>
+using namespace std;
+struct adress
+{
+    string street;
+    string haus;
+    string kvartira;
+};
+struct PEOPLE {
+    string familiya;
+    string siti;
+    adress pepleadress;
+};
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    SetConsoleCP(1251);
+    int NUM;
+    cout << "Введите кол-во жителей: ";
+    cin >> NUM;
+    cin.ignore();
+    PEOPLE* people = new PEOPLE[NUM];
+
+    // Ввод данных о сотрудниках
+    for (int i = 0; i < NUM; i++) {
+        cout << "Введите фамилию " << i + 1 << ": ";
+        cin>>people[i].familiya;
+
+        cout << "Введите название города " << i + 1 << ": ";
+        cin>>people[i].siti;
+
+        cout << "Введите название улицы  " << i + 1 << ": ";
+        cin>>people[i].pepleadress.street;
+
+        cout << "Введите номер дома " << i + 1 << ": ";
+        cin >> people[i].pepleadress.haus;
+
+        cout << "Введите номер квартиры " << i + 1 << ": ";
+        cin >> people[i].pepleadress.kvartira;
+        cin.ignore(); // игнорируем символ новой строки после ввода числа
+    }
+    cout << "TAБЛИЦА ЖИТЕЛЕЙ" << endl;
+    cout << "--------------------------------------------------------------------" << endl;
+    cout << "|" << setw(13) << left << "ФАМИЛИЯ";
+    cout << "|" << setw(10) << left << "ГОРОД";
+    cout << "|" << setw(13) << left << "УЛИЦА";
+    cout << "|" << setw(13) << left << "ДОМ";
+    cout << "|" << setw(13) << left << "КВАРТИРА" << "|" << endl;
+    cout << "--------------------------------------------------------------------" << endl;
+    for (int i = 0; i < NUM; i++)
+    {
+        cout << "|" << setw(13) << left << people[i].familiya;
+        cout << "|" << setw(10) << left << people[i].siti;
+        cout << "|" << setw(13) << left << people[i].pepleadress.street;
+        cout << "|" << setw(13) << left << people[i].pepleadress.haus;
+        cout << "|" << setw(13) << left << people[i].pepleadress.street << "|" << endl;
+        cout << "--------------------------------------------------------------------" << endl;
+    }
+    bool naideno = true;
+    for (int i = 0; i < NUM; i++)
+    {
+        for (int j = 0; j < NUM; j++)
+        {
+            if (people[i].siti != people[j].siti)
+            {
+                if (people[i].pepleadress.street == people[j].pepleadress.street)
+                {
+                    if (people[i].pepleadress.haus == people[j].pepleadress.haus)
+                    {
+                        if (people[i].pepleadress.kvartira == people[j].pepleadress.kvartira)
+                        {
+                            cout << "В разных городах но по одному адресу: " << endl;
+                            cout << "--------------------------------------------------------------------" << endl;
+                            cout << "|" << setw(13) << left << "ФАМИЛИЯ";
+                            cout << "|" << setw(10) << left << "ГОРОД";
+                            cout << "|" << setw(13) << left << "УЛИЦА";
+                            cout << "|" << setw(13) << left << "ДОМ";
+                            cout << "|" << setw(13) << left << "КВАРТИРА" << "|" << endl;
+                            cout << "--------------------------------------------------------------------"<<endl;
+                            cout << "|" << setw(13) << left << people[i].familiya;
+                            cout << "|" << setw(10) << left << people[i].siti;
+                            cout << "|" << setw(13) << left << people[i].pepleadress.street;
+                            cout << "|" << setw(13) << left << people[i].pepleadress.haus;
+                            cout << "|" << setw(13) << left << people[i].pepleadress.street<<"|"<<endl;
+                            cout << "--------------------------------------------------------------------" << endl;
+                            cout << "|" << setw(13) << left << people[j].familiya;
+                            cout << "|" << setw(10) << left << people[j].siti;
+                            cout << "|" << setw(13) << left << people[j].pepleadress.street;
+                            cout << "|" << setw(13) << left << people[j].pepleadress.haus;
+                            cout << "|" << setw(13) << left << people[j].pepleadress.street << "|" << endl;
+                            cout << "--------------------------------------------------------------------" << endl;
+                            naideno = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (naideno == false)
+            break;
+    }
+    delete[] people;
+    return 0;
+}
