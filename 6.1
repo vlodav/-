@@ -1,0 +1,26 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int kolvopredlosheniy(string a)
+{
+	int kolvo = 0;
+	for (int i = 0; i <a.length(); i++)
+	{
+		if (a[i] == '.' or a[i] == '?' or a[i] == '!') {
+			kolvo++;
+		}
+	}
+	return kolvo;
+}
+int main() {
+	setlocale(LC_ALL, "Russian");
+	string messeg1;
+	string messeg2;
+	cout << "введите текст 1"<<endl;
+	getline(cin, messeg1);
+	cout << "введите текст 2" << endl;
+	getline(cin, messeg2);
+	cout << "количество предложений в тексте 1: " << kolvopredlosheniy(messeg1) << endl;
+	cout << "количество предложений в тексте 2: " << kolvopredlosheniy(messeg2) << endl;
+	return 0;
+}
