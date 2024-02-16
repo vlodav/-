@@ -1,0 +1,24 @@
+#include<iostream>
+#include<string>
+#include<Windows.h>
+using namespace std;
+int main() {
+	setlocale(LC_ALL, "Russian");
+	SetConsoleCP(1251);
+	string messeg1;
+	string messeg2;
+	string messeg3;
+	string messegsumm ="";
+	cout << "введите слово 1"<<endl;
+	cin>> messeg1;
+	cout << "введите слово 2" << endl;
+	cin >> messeg2;
+	cout << "введите слово 2" << endl;
+	cin >> messeg3;
+	messegsumm += messeg1[messeg1.size() - 1];
+	messegsumm += messeg2[messeg2.size() - 1];
+	messegsumm += messeg3[messeg3.size() - 1];
+	cout << "новая последовательность" << endl;
+	cout << messegsumm;
+	return 0;
+}
