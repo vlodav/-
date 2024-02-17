@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+void perimetrr(double& a, double& b,double& c, double& perimetr)
+{
+    perimetr = a + b + c;
+}
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    for (int i = 0; i < 2; i++)
+    {
+        double storonaa;
+        double storonab;
+        double storonac;
+        cout << "введите сторону а: ";
+        cin >> storonaa;
+        cout << "введите сторону b: ";
+        cin >> storonab;
+        cout << "введите сторону c: ";
+        cin >> storonac;
+        double perimetr;
+        perimetrr(storonaa, storonab, storonac, perimetr);
+        cout << "периметр треугольника: " << perimetr<<endl;
+    }
+    return 0;
+}
