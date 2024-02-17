@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+void xaracteristiki(double storona, double& perimetr,double& diagonal, double& ploshad)
+{
+    perimetr = storona * 4;
+    diagonal = storona * sqrt(2);
+    ploshad = storona * storona;
+}
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    for (int i = 0; i < 2; i++)
+    {
+        double storona;
+        double perimetr;
+        double diagonal;
+        double ploshad;
+        cout << "введите размер стороны квадрата " <<i+1<<": ";
+        cin >> storona;
+        xaracteristiki(storona, perimetr, diagonal, ploshad);
+        cout << "периметр квадрата: " << perimetr<<endl;
+        cout << "диагональ квадрата: " << diagonal << endl;
+        cout << "площадь квадрата: " << ploshad << endl;
+    }
+    return 0;
+}
