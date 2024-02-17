@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+void zapolnenie(int arr[],int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = -20 + (rand() % (20 - (-20) + 1));
+    }
+}
+void vivod(int arr[],int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+}
+int kolvo(int arr[],int size)
+{
+    int kolichestvo = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i] > 0) {
+            kolichestvo++;
+        }
+    }
+    return kolichestvo;
+}
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int const size = 20;
+    int const size2 = 5;
+    int x[size];
+    int y[size];
+    int z[size2];
+    zapolnenie(x,size);
+    zapolnenie(y,size);
+    zapolnenie(z,size2);
+    cout << "массив х: ";
+    vivod(x,size);
+    cout << "Количество положительных в массиве x: " <<kolvo(x,size) <<endl;
+    cout << "массив y: ";
+    vivod(y,size);
+    cout << "Количество положительных в массиве y: " << kolvo(y,size) << endl;
+    cout << "массив z: ";
+    vivod(z,size2);
+    cout << "Количество положительных в массиве z: " << kolvo(z,size2) << endl;
+    return 0;
+}
