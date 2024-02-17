@@ -1,0 +1,53 @@
+#include <iostream>
+#include <ctime>
+#include<stdlib.h>
+using namespace std;
+void zapolnenie(int arr[],int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = -20 + (rand() % (20 - (-20) + 1));
+    }
+}
+void vivod(int arr[],int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+}
+int summ(int arr[],int size)
+{
+    int element = arr[0];
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i] > element) {
+           element = arr[i];
+        }
+    }
+    return element;
+}
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    srand(time(NULL));
+    int const size = 20;
+    int x[size];
+    int y[size];
+    int z[size];
+    zapolnenie(x,size);
+    zapolnenie(y,size);
+    zapolnenie(z,size);
+    cout << "массив х: ";
+    vivod(x,size);
+    cout << "максимальный положительный элемент в массиве x: " <<summ(x,size) <<endl;
+    cout << "массив y: ";
+    vivod(y,size);
+    cout << "максимальный положительный элемент в массиве y: " << summ(y,size) << endl;
+    cout << "массив z: ";
+    vivod(z,size);
+    cout << "максимальный положительный элемент в массиве z: " << summ(z,size) << endl;
+    cout << "сумма максимальных положительных элементов массивов: " << summ(x, size) + summ(y, size) + summ(z, size);
+    return 0;
+}
