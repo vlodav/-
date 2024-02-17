@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include<stdlib.h>
 using namespace std;
 void zapolnenie(int arr[],int size)
 {
@@ -29,6 +31,7 @@ int kolvo(int arr[],int size)
 int main()
 {
     setlocale(LC_ALL, "Russian");
+    srand(time(NULL));
     int const size = 20;
     int const size2 = 5;
     int x[size];
