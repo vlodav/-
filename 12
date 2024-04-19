@@ -1,0 +1,465 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <stdlib.h>
+#include <iomanip>
+using namespace std;
+string namefile;
+struct sluzachiy
+{
+	string familia;
+	string name;
+	string otchestvo;
+	int chislo_Rojdeniya;
+	int mesyac_Rojdeniya;
+	int god_Rojdeniya;
+	string pol_M_W;
+};
+ostream& operator <<(ostream& os, const sluzachiy& people)
+{
+	os << people.familia << " " << people.name<< " " << people.otchestvo << " " << people.chislo_Rojdeniya << " " << people.mesyac_Rojdeniya<<" "<<people.god_Rojdeniya<<" "<<people.pol_M_W;
+	return os;
+}
+istream& operator >>(istream& is, sluzachiy& people)
+{
+	is >> people.familia>>people.name>>people.otchestvo>>people.chislo_Rojdeniya>>people.mesyac_Rojdeniya>>people.god_Rojdeniya>>people.pol_M_W;
+	return is;
+}
+void vibor()
+{
+	cout << "Выберети номер действия:" << endl;
+	cout << "1. Загрузить все данные из файла на экран; " << endl;
+	cout << "2. Ввести новые данные в фаил; " << endl;
+	cout << "3. Добавить данных в конец файла; " << endl;
+	cout << "4. Сортировка базы данных по алфавиту (по фамилии); " << endl;
+	cout << "5. Cортировка базы данных по возрасту; " << endl;
+	cout << "6. Cписок людей, родившихся в заданном месяце; " << endl;
+	cout << "7. Фамилию самого старшего мужчины; " << endl;
+	cout << "8. Все фамилии, начинающиеся с заданной буквы; " << endl;
+	cout << "0. Выход из программы; " << endl;
+}
+void getdan_1()
+{
+	ifstream mufile;
+	cout << "введите путь и имя файла: ";
+	cin >> namefile;
+	mufile.open(namefile);
+	if (!mufile.is_open())
+	{
+		cout << "произошла ошибка при открытии файла!!!" << endl;
+	}
+	else
+	{
+		cout << "ТАБЛИЦА СУЖАЩИХ" << endl;
+		cout << "-----------------------------------------------------------------" << endl;
+		cout << "|" << setw(13) << left << "ФАМИЛИЯ" << "|" << setw(13) << left << "ИМЯ" << "|" << setw(13)
+			<< left << "ОТЧЕСТВО" << "|" << setw(5) << left << "ЧИСЛО" << "|" << setw(5) << left << "МЕСЯЦ" << "|" << setw(5) << left << "ГОД" << "|" << setw(3) << left << "ПОЛ" << "|" << endl;
+		cout << "-----------------------------------------------------------------" << endl;
+		while (true)
+		{
+			sluzachiy num;
+			mufile >> num;
+			if (mufile.eof())
+			{
+				break;
+			}
+			cout << "|" << setw(13) << left << num.familia;
+			cout << "|" << setw(13) << left << num.name;
+			cout << "|" << setw(13) << left << num.otchestvo;
+			cout << "|" << setw(5) << left << num.chislo_Rojdeniya;
+			cout << "|" << setw(5) << left << num.mesyac_Rojdeniya;
+			cout << "|" << setw(5) << left << num.god_Rojdeniya;
+			cout << "|" << setw(3) << left << num.pol_M_W << "|" << endl;
+			cout << "-----------------------------------------------------------------" << endl;
+		}
+
+	}
+	mufile.close();
+}
+void setdan_2()
+{
+	ofstream mufile;
+	cout << "введите путь и имя файла: ";
+	cin >> namefile;
+	mufile.open(namefile);
+	if (!mufile.is_open())
+	{
+		cout << "произошла ошибка при открытии файла!!!" << endl;
+	}
+	else
+	{
+		int size;
+		cout << "введите количество служащих которое хотите записать: ";
+		cin >> size;
+		sluzachiy* arr = new sluzachiy[size];
+		for (int i = 0; i < size; i++)
+		{
+			cout << "введите фамилию: ";
+			cin >> arr[i].familia;
+			cout << "введите имя: ";
+			cin >> arr[i].name;
+			cout << "введите отчество: ";
+			cin >> arr[i].otchestvo;
+			cout << "введите число рождения: ";
+			cin >> arr[i].chislo_Rojdeniya;
+			cout << "введите месяц рождения: ";
+			cin >> arr[i].mesyac_Rojdeniya;
+			cout << "введите год рождения: ";
+			cin >> arr[i].god_Rojdeniya;
+			cout << "введите пол (M - мужской,W - женский): ";
+			cin >> arr[i].pol_M_W;
+		}
+		for (int i = 0; i < size; i++)
+		{
+			mufile << arr[i] << endl;
+		}
+		delete[] arr;
+	}
+	mufile.close();
+
+}
+void setdanend_3()
+{
+	ofstream mufile;
+	cout << "введите путь и имя файла: ";
+	cin >> namefile;
+	mufile.open(namefile, ofstream::app);
+	if (!mufile.is_open())
+	{
+		cout << "произошла ошибка при открытии файла!!!" << endl;
+	}
+	else
+	{
+		int size;
+		cout << "введите количество служащих которое хотите добавить: ";
+		cin >> size;
+		sluzachiy* arr = new sluzachiy[size];
+		for (int i = 0; i < size; i++)
+		{
+			cout << "введите фамилию: ";
+			cin >> arr[i].familia;
+			cout << "введите имя: ";
+			cin >> arr[i].name;
+			cout << "введите отчество: ";
+			cin >> arr[i].otchestvo;
+			cout << "введите число рождения: ";
+			cin >> arr[i].chislo_Rojdeniya;
+			cout << "введите месяц рождения: ";
+			cin >> arr[i].mesyac_Rojdeniya;
+			cout << "введите год рождения: ";
+			cin >> arr[i].god_Rojdeniya;
+			cout << "введите пол (M - мужской,W - женский): ";
+			cin >> arr[i].pol_M_W;
+		}
+		for (int i = 0; i < size; i++)
+		{
+			mufile << arr[i] << endl;
+		}
+		delete[] arr;
+	}
+	mufile.close();
+}
+void sortdan_4()
+{
+	int kolvo = 0;
+	ifstream mufile;
+	mufile.open(namefile);
+	if (!mufile.is_open())
+	{
+		cout << "функция доступна после использования одного из пунктов: 1,2,3!" << endl;
+	}
+	else
+	{
+
+		while (true)
+		{
+			sluzachiy num;
+			mufile >> num;
+			if (mufile.eof())
+			{
+				break;
+			}
+			kolvo++;
+		}
+		mufile.close();
+		mufile.open(namefile);
+		sluzachiy* arr = new sluzachiy[kolvo];
+		for (int i = 0; i < kolvo; i++)
+		{
+			mufile >> arr[i];
+		}
+		mufile.close();
+		//сортировка пузырьком
+		for (int i = 0; i < kolvo - 1; i++)
+		{
+			for (int j = 0; j < kolvo - i - 1; j++)
+			{
+				if (arr[j].familia > arr[j + 1].familia)
+				{
+					swap(arr[j], arr[j + 1]);
+				}
+			}
+		}
+		ofstream a;
+		a.open(namefile);
+		for (int i = 0; i < kolvo; i++)
+		{
+			a << arr[i] << "\n";
+		}
+		a.close();
+		delete[] arr;
+		cout << "СОРТИРОВКА ПРОШЛА УСПЕШНО!!!" << endl;
+	}
+
+}
+void getdandolg_5()
+{
+	int kolvo = 0;
+	ifstream mufile;
+	mufile.open(namefile);
+	if (!mufile.is_open())
+	{
+		cout << "функция доступна после использования одного из пунктов: 1,2,3!" << endl;
+	}
+	else
+	{
+
+		while (true)
+		{
+			sluzachiy num;
+			mufile >> num;
+			if (mufile.eof())
+			{
+				break;
+			}
+			kolvo++;
+		}
+		mufile.close();
+		mufile.open(namefile);
+		sluzachiy* arr = new sluzachiy[kolvo];
+		for (int i = 0; i < kolvo; i++)
+		{
+			mufile >> arr[i];
+		}
+		mufile.close();
+		//сортировка пузырьком
+		for (int i = 0; i < kolvo - 1; i++)
+		{
+			for (int j = 0; j < kolvo - i - 1; j++)
+			{
+				if (arr[j].god_Rojdeniya > arr[j + 1].god_Rojdeniya ||
+					(arr[j].god_Rojdeniya == arr[j + 1].god_Rojdeniya &&
+						arr[j].mesyac_Rojdeniya > arr[j + 1].mesyac_Rojdeniya) ||
+					(arr[j].god_Rojdeniya == arr[j + 1].god_Rojdeniya &&
+						arr[j].mesyac_Rojdeniya == arr[j + 1].mesyac_Rojdeniya &&
+						arr[j].chislo_Rojdeniya > arr[j + 1].chislo_Rojdeniya))
+				{
+					swap(arr[j], arr[j + 1]);
+				}
+			}
+		}
+		ofstream a;
+		a.open(namefile);
+		for (int i = 0; i < kolvo; i++)
+		{
+			a << arr[i] << "\n";
+		}
+		a.close();
+		delete[] arr;
+		cout << "СОРТИРОВКА ПРОШЛА УСПЕШНО!!!" << endl;
+	}
+
+}
+void NAMBER1_6()
+{
+	int kolvo = 0;
+	ifstream mufile;
+	mufile.open(namefile);
+	if (!mufile.is_open())
+	{
+		cout << "функция доступна после использования одного из пунктов: 1,2,3!" << endl;
+	}
+	else
+	{
+		int mesyac;
+		cout << "введите искомый месяц: ";
+		cin >> mesyac;
+		while (true)
+		{
+			sluzachiy a;
+			mufile >> a;
+			if (mufile.eof())
+				break;
+			if (mesyac == a.mesyac_Rojdeniya)
+				kolvo++;
+		}
+		mufile.close();
+		if (kolvo == 0)
+		{
+			cout << "Нету рожденных служащих в этом  месяце" << endl;
+		}
+		else
+		{
+			cout << "СПИСОК СЛУЖАЩИХ РОЖДЕННЫХ В ЭТОМ МЕСЯЦЕ" << endl;
+			cout << "-----------------------------------------------------------------" << endl;
+			cout << "|" << setw(13) << left << "ФАМИЛИЯ" << "|" << setw(13) << left << "ИМЯ" << "|" << setw(13)
+				<< left << "ОТЧЕСТВО" << "|" << setw(5) << left << "ЧИСЛО" << "|" << setw(5) << left << "МЕСЯЦ" << "|" << setw(5) << left << "ГОД" << "|" << setw(3) << left << "ПОЛ" << "|" << endl;
+			cout << "-----------------------------------------------------------------" << endl;
+			mufile.open(namefile);
+			while (true)
+			{
+				sluzachiy a;
+				mufile >> a;
+				if (mufile.eof())
+					break;
+				if (mesyac == a.mesyac_Rojdeniya)
+				{
+					cout << "|" << setw(13) << left << a.familia;
+					cout << "|" << setw(13) << left << a.name;
+					cout << "|" << setw(13) << left << a.otchestvo;
+					cout << "|" << setw(5) << left << a.chislo_Rojdeniya;
+					cout << "|" << setw(5) << left << a.mesyac_Rojdeniya;
+					cout << "|" << setw(5) << left << a.god_Rojdeniya;
+					cout << "|" << setw(3) << left << a.pol_M_W << "|" << endl;
+					cout << "-----------------------------------------------------------------" << endl;
+				}
+				
+			}
+			mufile.close();
+			
+		}
+		
+	}
+
+	
+}
+void getdansredball_7()
+{
+	string familiya_;
+	int max_god, max_mesyac, max_den;
+	ifstream mufile;
+	bool t = true;
+	mufile.open(namefile);
+	if (!mufile.is_open())
+	{
+		cout << "функция доступна после использования одного из пунктов: 1,2,3!" << endl;
+	}
+	else
+	{
+		while (true)
+		{
+			sluzachiy a;
+			mufile >> a;
+			if (mufile.eof())
+				break;
+			if (t == true && a.pol_M_W =="M")
+			{
+				max_god = a.god_Rojdeniya;
+				max_mesyac = a.mesyac_Rojdeniya;
+				max_den = a.chislo_Rojdeniya;
+				familiya_ = a.familia;
+				t = false;
+			}
+			if (a.pol_M_W == "M")
+			{
+				if (max_god > a.god_Rojdeniya)
+				{
+					max_god = a.god_Rojdeniya;
+					max_mesyac = a.mesyac_Rojdeniya;
+					max_den = a.chislo_Rojdeniya;
+					familiya_ = a.familia;
+				}
+				else if (max_god == a.god_Rojdeniya)
+				{
+					max_god = a.god_Rojdeniya;
+					if (max_mesyac >= a.mesyac_Rojdeniya)
+					{
+						max_mesyac = a.mesyac_Rojdeniya;
+						if (max_den >= a.chislo_Rojdeniya)
+						{
+							max_den = a.chislo_Rojdeniya;
+							familiya_ = a.familia;
+						}
+					}
+				}
+			}
+		}
+	}
+	cout << "самый старший мужчина: " << familiya_<<endl;
+	mufile.close();
+}
+void familiya_s_bukvi_8()
+{
+	int kolvo = 0;
+	ifstream mufile;
+	mufile.open(namefile);
+	if (!mufile.is_open())
+	{
+		cout << "функция доступна после использования одного из пунктов: 1,2,3!" << endl;
+	}
+	else
+	{
+		char bukva;
+		cout << "введите жулаемую первую букву фамилии: ";
+		cin >> bukva;
+		while (true)
+		{
+			sluzachiy a;
+			mufile >> a;
+			if (mufile.eof())
+				break;
+			if (bukva == a.familia[0])
+				cout << a.familia << endl;
+				kolvo++;
+		}
+		if (kolvo == 0)
+			cout << "нет фамилии на такую букву!"<<endl;
+	}
+	mufile.close();
+}
+int main()
+{
+	bool proverka = true;
+	int size;
+	setlocale(LC_ALL, "ru");
+	do {
+		vibor();
+		cout << "Ваш выбор: ";
+		cin >> size;
+		switch (size)
+		{
+		case 1:
+			getdan_1();
+			break;
+		case 2:
+			setdan_2();
+			break;
+		case 3:
+			setdanend_3();
+			break;
+		case 4:
+			sortdan_4();
+			break;
+		case 5:
+			getdandolg_5();
+			break;
+		case 6:
+			NAMBER1_6();
+			break;
+		case 7:
+			getdansredball_7();
+			break;
+		case 8:
+			familiya_s_bukvi_8();
+			break;
+		case 0:
+			proverka = false;
+			cout << "ПРОГРАММА ЗАВЕРШЕНА!!!";
+			break;
+		default:
+			cout << "Bы ввели некоректные данные!!!" << endl;
+			break;
+		}
+	} while (proverka == true);
+	return 0;
+}
