@@ -1,0 +1,38 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int kolvo_null = 0;
+	double proizvedenie = 1;
+	bool t = false;
+	ifstream namefail;
+	namefail.open("a.txt");
+	if (!namefail.is_open())
+	{
+		cout << "Ошибка при открытии файла"<<endl;
+	}
+	else
+	{
+		cout << "фаил открылся" << endl;
+		double r;
+		while (namefail >> r)
+		{
+			if (r == 0)
+				kolvo_null++;
+			if (r < 1 && r>0)
+				proizvedenie *= r;
+			t = true;
+			cout << r << "\t";
+		}
+		cout << endl;
+		cout << "(количество элементов = 0) =  " << kolvo_null << endl;
+		if(t==false)
+			cout << "нету элементов меньше 1 и больше 0: "<< endl;
+		else
+			cout << "произведение элементов меньше 1 и больше 0: " << proizvedenie << endl;
+	}
+	namefail.close();
+	system("pause");
+}
