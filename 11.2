@@ -1,0 +1,56 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	double proizvedenie = 1;
+	bool t = false;
+	ifstream namefail;
+	namefail.open("a1.txt");
+	if (!namefail.is_open())
+	{
+		cout << "Ошибка при открытии файла" << endl;
+	}
+	else
+	{
+		cout << "фаил открылся" << endl;
+		double r;
+		cout << "числа файла а1.txt: ";
+		while (namefail >> r)
+		{
+			if (r<0)
+				proizvedenie *= r;
+			t = true;
+			cout<< r << "\t";
+		}
+		cout << endl;
+	}
+	namefail.close();
+	ifstream namefail2;
+	namefail2.open("a2.txt");
+	if (!namefail2.is_open())
+	{
+		cout << "Ошибка при открытии файла" << endl;
+	}
+	else
+	{
+		cout << "фаил открылся" << endl;
+		double r;
+		cout << "числа файла а2.txt: ";
+		while (namefail2 >> r)
+		{
+			if (r<0)
+				proizvedenie *= r;
+			t = true;
+			cout<< r << "\t";
+		}
+		cout << endl;
+	}
+	namefail2.close();
+	if (t == false)
+		cout << "нету отрицательных элементов: " << endl;
+	else
+		cout << "произведение отрицательных элементов: " << proizvedenie << endl;
+	system("pause");
+}
